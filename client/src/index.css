@@ -1,0 +1,28 @@
+/* Index CSS */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+html {
+  --font-family: "DM Sans", sans-serif;
+
+  font-family: var(--font-family);
+  background-color: rgb(59, 59, 75);
+}
+
+html, main, #root, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+/* No Drag - No Highlight */
+.text-highlight {
+  -webkit-user-select: none;  
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
