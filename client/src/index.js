@@ -10,8 +10,7 @@ import { store } from './ReduxStore.js';
 
 // Import Components
 import Navigation from './Navigation/Navigation.js';
-import PageBuilder from './PageBuilder/PageBuilder.js';
-
+import Home from './Pages/Home.js';
 // Router
 const router = createHashRouter([
   {
@@ -20,7 +19,7 @@ const router = createHashRouter([
     children: [
       { 
         path: '/', 
-        element: <PageBuilder /> 
+        element: <Home /> 
       }
     ]
   }

@@ -1,0 +1,22 @@
+/* Canvas Box */
+.canvas-box {
+  width: 100px;
+  height: 100px;
+  cursor: move;
+  border-radius: 10px;
+  margin: 2px;
+  padding: 5px;
+  box-sizing: border-box;
+  text-align: center;
+  align-content: center;
+  color: white;
+  font-family: var(--font-family);
+  border: 1px solid var(--border-color-1);
+  transform: translate(0, 0);
+  transition: border 250ms ease-in-out;
+}
+
+.blueprint-dropbox {
+  transition: padding 100ms ease-in-out, margin 100ms ease-in-out, border-color 250ms ease-in-out;
+  border: 3px solid transparent;
+}

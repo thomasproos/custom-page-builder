@@ -13,6 +13,7 @@
     "react-router-dom": "^6.23.1",
     "react-scripts": "5.0.1",
     "undoredo.js": "^1.2.0",
+    "universal-cookie": "^7.1.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

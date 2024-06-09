@@ -3,9 +3,7 @@
 
 html {
   --font-family: "DM Sans", sans-serif;
-
   font-family: var(--font-family);
-  background-color: rgb(59, 59, 75);
 }
 
 html, main, #root, body {
@@ -15,7 +13,7 @@ html, main, #root, body {
 }
 
 /* No Drag - No Highlight */
-.text-highlight {
+.no-highlight-or-drag {
   -webkit-user-select: none;  
   -moz-user-select: none;
   -ms-user-select: none;
