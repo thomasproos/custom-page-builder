@@ -5,71 +5,23 @@ import { useState } from 'react';
 import './PageBuilder.css';
 
 // Import Components
-import Canvas from './Canvas/Canvas';
+import DragCanvas from './Canvas/Canvas';
+import Toolbar from './ToolBar/Toolbar';
+
+// Import JSON
+import blueprintData from './DefaultBlueprint.json';
 
 export default function PageBuilder({ theme }) {
-  const [blueprint, setBlueprint] = useState({
-    type: 'canvas',
-    level: 0,
-    idIndex: 0,
-    position: 0,
-    id: 3,
-    style: {},
-    children: [
-      {
-        type: 'box',
-        parent: 'column',
-        level: 1,
-        id: 1,
-        style: {},
-        children: [],
-        sides: {
-          top: true,
-          right: false,
-          bottom: true,
-          left: false
-        }
-      },
-      {
-        type: 'box',
-        parent: 'column',
-        level: 1,
-        id: 2,
-        style: {},
-        children: [],
-        sides: {
-          top: true,
-          right: false,
-          bottom: true,
-          left: false
-        }
-      },
-      {
-        type: 'box',
-        parent: 'column',
-        level: 1,
-        id: 3,
-        style: {},
-        children: [],
-        sides: {
-          top: true,
-          right: false,
-          bottom: true,
-          left: false
-        }
-      },
-    ]
-  });
+  const [cursorTool, setCursorTool] = useState('auto');
+  const [blueprint, setBlueprint] = useState(blueprintData);
   
   return(
-    <section id="page-builder">
-      <div id="toolbar" className="no-highlight-or-drag">
-        <div id="toolbar-new-container-bttn" className="toolbar-bttn">New</div>
-        <div id="toolbar-new-text-bttn" className="toolbar-bttn">Trash</div>
-      </div>
+    <section id="page-builder" style={{ cursor: cursorTool }}>
+      {/* Toolbar */}
+      <Toolbar cursorTool={cursorTool} setCursorTool={setCursorTool} />
       
       {/* Canvas */}
-      <Canvas blueprint={blueprint} setBlueprint={setBlueprint}/>
+      <DragCanvas cursorTool={cursorTool} blueprint={blueprint}/>
     </section>
   );
 }

@@ -1,11 +1,13 @@
 /* Page Canvas */
 #canvas {
   flex: 1;
+  min-height: fit-content;
   display: flex;
   flex-direction: column;
   align-items: center;
   border: 1px solid transparent;
   transition: border 300ms ease-in-out;
+  padding: 5px;
 }
 
 /* Active Dragging */
