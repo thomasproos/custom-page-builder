@@ -30,7 +30,6 @@ export default function DraggableComponent({ children, childBlueprint, canvasRef
     };
 
     setDraggedComponent(containerReference.current.id);
-    console.log('^w^')
   };
 
   useEffect(() => {
@@ -69,8 +68,14 @@ export default function DraggableComponent({ children, childBlueprint, canvasRef
         }
       };
 
+      // Handle detecting which target is currently being hovered over
+      const handleDragDetection = (event) => {
+        
+      };
+
       // Handle movements
       canvasReference.current.addEventListener('mousemove', handleDrag);
+      canvasReference.current.addEventListener('mousemove', handleDragDetection)
       canvasReference.current.addEventListener('mouseup', handleDragEnd);
 
     })();

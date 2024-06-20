@@ -10,7 +10,7 @@ import './Box.css';
 import RecursivePaint from '../RecursivePaint/RecursivePaint';
 
 export default function Box({ childBlueprint, parentReference, cursorTool, canvasReference }) {
-  const [currentlyHovered, setCurrentHovered] = useState(false);
+  const [currentlyHovered, setCurrentlyHovered] = useState(false);
   const currentReference = useRef(null);
   // const [dropHighlight, setDropHighlight] = useState('');
   // const [modifiedBox, setModifiedBox] = useState(null);
@@ -24,7 +24,6 @@ export default function Box({ childBlueprint, parentReference, cursorTool, canva
 
   // Handle Drag Over
   const handleDragOver = (event) => {
-      console.log(':D');
       // Verify that the user is dragging a component
     if (draggedComponent !== null) {
       // The redux value setter method
@@ -33,13 +32,13 @@ export default function Box({ childBlueprint, parentReference, cursorTool, canva
       };
   
       setHoveredComponent(event.target.id);
-      setCurrentHovered(true);
+      setCurrentlyHovered(true);
     }
   };
 
   const handleDragOverLeave = (event) => {
+    event.preventDefault()
     // Verify that the user is dragging a component
-      console.log(':o');
       if (draggedComponent !== null) {
       // The redux value setter method
       const setHoveredComponent = (value) => {
@@ -47,7 +46,7 @@ export default function Box({ childBlueprint, parentReference, cursorTool, canva
       };
   
       setHoveredComponent(null);
-      setCurrentHovered(false);
+      setCurrentlyHovered(false);
     }
   };
 
@@ -118,8 +117,8 @@ export default function Box({ childBlueprint, parentReference, cursorTool, canva
   return(
     // Box Container
     <div ref={currentReference} id={"box-" + childBlueprint.id} className={"canvas-box " + (currentlyHovered ? "active-drag-hover" : "")} 
-    style={childBlueprint.style} onDragOver={handleDragOver} onDragLeave={handleDragOverLeave}>
-      
+    style={childBlueprint.style} onMouseOver={handleDragOver} onMouseLeave={handleDragOverLeave} onDrop={handleDragDrop}>
+      {childBlueprint.id}
       {/* Box Children */}
       {childBlueprint.children.map((child, index) => {
         return (
