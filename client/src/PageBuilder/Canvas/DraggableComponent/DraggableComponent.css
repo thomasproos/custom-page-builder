@@ -1,60 +1,51 @@
 .blueprint-dropbox {
   transition: padding 100ms ease-in-out, margin 100ms ease-in-out, border-color 250ms ease-in-out;
   position: static;
+  border-radius: 10px;
+  display: flex;
 }
 
 /* Border Highlight */
 .top-border-highlight::before {
   content: '';
-  position: absolute;
+  display: block;
   width: 100px;
-  left: 0;
-  right: 0;
-  bottom: calc(98%);
   margin-left: auto;
   margin-right: auto;
   border-radius: 10px;
-  border: 3px solid white;
-}
-
-.right-border-highlight::before {
-  content: '';
-  position: absolute;
-  width: 100px;
-  left: 0;
-  right: 0;
-  margin: -10px;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 10px;
-  border: 3px solid white;
+  border: 3px solid transparent;
   pointer-events: none;
 }
 
-.bottom-border-highlight::before {
+.right-border-highlight::after {
   content: '';
-  position: absolute;
+  display: block;
+  height: 100px;
+  margin-top: auto;
+  margin-bottom: auto;
+  border-radius: 10px;
+  border: 3px solid transparent;
+  pointer-events: none;
+}
+
+.bottom-border-highlight::after {
+  content: '';
+  display: block;
   width: 100px;
-  left: 0;
-  right: 0;
-  top: calc(98%);
   margin-left: auto;
   margin-right: auto;
   border-radius: 10px;
-  border: 3px solid white;
+  border: 3px solid transparent;
   pointer-events: none;
 }
 
 .left-border-highlight::before {
   content: '';
-  position: absolute;
-  width: 100px;
-  left: 0;
-  right: 0;
-  margin: -10px;
-  margin-left: auto;
-  margin-right: auto;
+  display: block;
+  height: 100px;
+  margin-top: auto;
+  margin-bottom: auto;
   border-radius: 10px;
-  border: 3px solid white;
+  border: 3px solid transparent;
   pointer-events: none;
 }

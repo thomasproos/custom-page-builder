@@ -12,7 +12,7 @@ export default function RecursivePaint({ childBlueprint, parentReference, cursor
   if (childBlueprint.type === 'box') {
     if (cursorTool === 'move') {
       return(
-        <DraggableComponent childBlueprint={childBlueprint} canvasReference={canvasReference}>
+        <DraggableComponent childBlueprint={childBlueprint} canvasReference={canvasReference} parentReference={parentReference}>
           <Box childBlueprint={childBlueprint} parentReference={parentReference} cursorTool={cursorTool}
           canvasReference={canvasReference}/>    
         </DraggableComponent>
