@@ -8,6 +8,13 @@
 
 /* Hovered Container */
 .imitation-container::after {
+  content: "";
+  width: 97%;
+  height: 97%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: -1;
   border: 2px transparent dashed;
   transition: border 200ms ease-in-out;
 }
@@ -18,65 +25,69 @@
 }
 
 .actively-hovered-container::after {
-  content: "";
-  width: 97%;
-  height: 97%;
-  position: absolute;
-  top: 0px;
-  left: 0px;
   border: 2px white dashed;
-  z-index: -1;
-}
-
-.actively-hovered-container::after {
-  content: "";
-  width: 97%;
-  height: 97%;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  border: 2px white dashed;
-  z-index: -1;
-  transition: border 200ms ease-in-out;
 }
 
 /* Border Highlight */
 .top-border-highlight {
   display: block;
   width: 100px;
+  max-height: 80%;
   margin-left: auto;
   margin-right: auto;
   border-radius: 10px;
+  background-color: white;
   box-shadow: 0px 0px 0px 3px white;
   pointer-events: none;
+  opacity: 0;
+  animation: appear 200ms forwards;
 }
 
 .right-border-highlight {
   display: block;
   height: 100px;
+  max-height: 80%;
   margin-top: auto;
   margin-bottom: auto;
   border-radius: 10px;
+  background-color: white;
   box-shadow: 0px 0px 0px 3px white;
   pointer-events: none;
+  opacity: 0;
+  animation: appear 200ms forwards;
 }
 
 .bottom-border-highlight {
   display: block;
   width: 100px;
+  max-height: 80%;
   margin-left: auto;
   margin-right: auto;
   border-radius: 10px;
+  background-color: white;
   box-shadow: 0px 0px 0px 3px white;
   pointer-events: none;
+  opacity: 0;
+  animation: appear 200ms forwards;
 }
 
 .left-border-highlight {
   display: block;
   height: 100px;
+  max-height: 80%;
   margin-top: auto;
   margin-bottom: auto;
   border-radius: 10px;
+  background-color: white;
   box-shadow: 0px 0px 0px 3px white;
   pointer-events: none;
+  opacity: 0;
+  animation: appear 200ms forwards;
+}
+
+/* Animations */
+@keyframes appear {
+  100% {
+    opacity: 1;
+  }
 }

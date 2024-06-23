@@ -13,7 +13,6 @@ export default function Box({ childBlueprint, parentReference, cursorTool, canva
   return(
     // Box Container
     <div ref={currentReference} id={"box-" + childBlueprint.id} className="canvas-box" style={childBlueprint.style}>
-      {childBlueprint.id}
       {/* Box Children */}
       {childBlueprint.children.map((child, index) => {
         return (

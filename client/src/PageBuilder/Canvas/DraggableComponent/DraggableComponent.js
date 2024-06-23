@@ -71,8 +71,12 @@ export default function DraggableComponent({ children, childBlueprint, canvasRef
           const setDraggedComponent = (value) => {
             dispatch({ type: actionTypes.SET_DRAGGED_COMPONENT, payload: value });
           };
+          const setHoveredComponent = (value) => {
+            dispatch({ type: actionTypes.SET_HOVERED_COMPONENT, payload: value });
+          };
 
           containerReference.current.style.pointerEvents = 'auto';
+          // setHoveredComponent(null);
           setDraggedComponent(null);
 
           // Remove the hovered element
@@ -87,11 +91,6 @@ export default function DraggableComponent({ children, childBlueprint, canvasRef
       // Handle movements
       canvasReference.current.addEventListener('mousemove', handleDrag);
       canvasReference.current.addEventListener('mouseup', handleDragEnd);
-
-      // Handle container drag actions
-      if (containerReference.current.id !== hoveredComponent) {        
-      }
-
     })();
   }, [canvasReference, dispatch, draggedCoordinates, hoveredComponent, parentReference]);
 

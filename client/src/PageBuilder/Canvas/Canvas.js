@@ -13,7 +13,7 @@ export default function Canvas({ cursorTool, blueprint }) {
   const canvasReference = useRef(null);
 
   // Establish the redux store
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   // const handleClick = (event) => {
   //   // The redux value setter method
@@ -24,6 +24,9 @@ export default function Canvas({ cursorTool, blueprint }) {
   //   // Clear the hovered component when clicked
   //   setHoveredComponent(null);
   // };
+
+  // Load in user preferences
+
 
   // Canvas Type Paint
   return(

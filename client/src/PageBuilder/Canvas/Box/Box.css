@@ -1,14 +1,4 @@
 /* Canvas Box */
 .canvas-box {
-  min-width: 100px;
-  min-height: 100px;
-  width: fit-content;
-  border-radius: 10px;
-  margin: 2px;
-  padding: 5px;
-  color: white;
-  display: flex;
-  font-family: var(--font-family);
-  border: 1px solid var(--border-color-1);
-  transition: border 250ms ease, width 200ms ease, height 200ms ease;
+
 }
