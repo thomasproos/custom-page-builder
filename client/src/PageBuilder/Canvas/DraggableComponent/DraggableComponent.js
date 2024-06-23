@@ -7,9 +7,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { actionTypes } from '../../../ReduxStore.js';
 
 export default function DraggableComponent({ children, childBlueprint, canvasReference, parentReference }) {
-  const [hoveredSide, setHoveredSide] = useState('none');
   const [draggedCoordinates, setDraggedCoordinates] = useState([]);
   const containerReference = useRef(null);
+  const imitationReference = useRef(null);
 
   // Establish the redux store
   const dispatch = useDispatch();
@@ -39,6 +39,8 @@ export default function DraggableComponent({ children, childBlueprint, canvasRef
 
   useEffect(() => {
     (() => {
+      const sideClassNameArray = ['top-border-highlight', 'right-border-highlight', 'bottom-border-highlight', 'left-border-highlight'];
+
       // Handle the active Drag Action
       const handleDrag = (event) => {
         event.stopPropagation();
@@ -72,6 +74,13 @@ export default function DraggableComponent({ children, childBlueprint, canvasRef
 
           containerReference.current.style.pointerEvents = 'auto';
           setDraggedComponent(null);
+
+          // Remove the hovered element
+          Array.from(parentReference.current.children).forEach((item) => {
+            if (sideClassNameArray.includes(item.className)) {
+              parentReference.current.removeChild(item);
+            }
+          });
         }
       };
 
@@ -80,12 +89,11 @@ export default function DraggableComponent({ children, childBlueprint, canvasRef
       canvasReference.current.addEventListener('mouseup', handleDragEnd);
 
       // Handle container drag actions
-      if (containerReference.current.id !== hoveredComponent) {
-        setHoveredSide('');
+      if (containerReference.current.id !== hoveredComponent) {        
       }
 
     })();
-  }, [canvasReference, dispatch, draggedCoordinates, hoveredComponent]);
+  }, [canvasReference, dispatch, draggedCoordinates, hoveredComponent, parentReference]);
 
   // Handle Drop Box
   const handleDropBoxDragOver = (event) => {
@@ -109,8 +117,6 @@ export default function DraggableComponent({ children, childBlueprint, canvasRef
         case topDistance:
           if (childBlueprint.sides.top) {
             side = 'top-border-highlight';
-          } else {
-            side = ''
           }
           break;
         case rightDistance:
@@ -139,44 +145,90 @@ export default function DraggableComponent({ children, childBlueprint, canvasRef
       };
 
       setHoveredComponent(containerReference.current.id);
-      setHoveredSide(side);
+
+      if (side !== null) {
+        // console.log(side);
+        // Check if there already is a hover element
+        let activeHoverBar = false;
+        Array.from(parentReference.current.children).forEach((item) => {
+          if (item.className === side) {
+            activeHoverBar = true;
+          } else if (item.className === 'top-border-highlight') {
+            parentReference.current.removeChild(item);
+          } else if (item.className === 'bottom-border-highlight') {
+            parentReference.current.removeChild(item);
+          } else if (item.className === 'left-border-highlight') {
+            parentReference.current.removeChild(item);
+          } else if (item.className === 'right-border-highlight') {
+            parentReference.current.removeChild(item);
+          }
+        });
+        
+        if (!activeHoverBar) {
+          // Add new hover divider to parent
+          const divider = document.createElement('div');
+          divider.innerHTML = '';
+          divider.className = side;
+    
+          // Check if before or after
+          if (side === 'top-border-highlight' || side === 'left-border-highlight') {
+            parentReference.current.insertBefore(divider, containerReference.current);
+          } else { 
+            parentReference.current.insertBefore(divider, containerReference.current.nextSibling);
+          }
+        }
+      }
     }
   };
 
   const handleDropBoxDragLeave = (event) => {
     if (draggedComponent !== null && draggedComponent !== containerReference.current.id) {
       event.stopPropagation();
-      setHoveredSide('');
+
+      const sideClassNameArray = ['top-border-highlight', 'right-border-highlight', 'bottom-border-highlight', 'left-border-highlight'];
+
+      // Remove the hovered element
+      Array.from(parentReference.current.children).forEach((item) => {
+        if (sideClassNameArray.includes(item.className)) {
+          parentReference.current.removeChild(item);
+        }
+      });
     }
   };
 
-  const handleDropBoxEnd = (event) => {
-    console.log(':D');
-    if (draggedComponent !== null && draggedComponent !== containerReference.current.id) {
-      event.stopPropagation();
-      setHoveredSide('');
-    }  
+  const handleContentDragOver = (event) => {
+    event.stopPropagation();
+
+    if (draggedComponent !== null) {
+      if (childBlueprint.children.length === 0) {  
+        // The redux value setter method
+        const setHoveredComponent = (value) => {
+          dispatch({ type: actionTypes.SET_HOVERED_COMPONENT, payload: value });
+        };
+  
+        setHoveredComponent(imitationReference.current.id);
+      }
+
+      // Remove the hovered element
+      const sideClassNameArray = ['top-border-highlight', 'right-border-highlight', 'bottom-border-highlight', 'left-border-highlight'];
+      Array.from(parentReference.current.children).forEach((item) => {
+        if (sideClassNameArray.includes(item.className)) {
+          parentReference.current.removeChild(item);
+        }
+      });
+    }
   };
 
   if (canvasReference !== null) {
-    if (hoveredSide !== 'none') {
-      setTimeout(() => {
-        return(
-          <div className={"blueprint-dropbox " + hoveredSide} id={"dropbox-" + childBlueprint.id} draggable="true" ref={containerReference}
-          onMouseDown={handleDragStart} onMouseOver={handleDropBoxDragOver} onMouseLeave={handleDropBoxDragLeave} onMouseUp={handleDropBoxEnd}
-          style={{ flexDirection: (parentReference.current !== null ? parentReference.current.style.flexDirection : '') }}>
-            {children}
-          </div>
-        );
-      }, 200);
-    } else {
-      return(
-        <div className={"blueprint-dropbox " + hoveredSide} id={"dropbox-" + childBlueprint.id} draggable="true" ref={containerReference}
-        onMouseDown={handleDragStart} onMouseOver={handleDropBoxDragOver} onMouseLeave={handleDropBoxDragLeave} onMouseUp={handleDropBoxEnd}
-        style={{ flexDirection: (parentReference.current !== null ? parentReference.current.style.flexDirection : '') }}>
+    return(
+      <div className="blueprint-dropbox" id={"dropbox-" + childBlueprint.id} draggable="true" ref={containerReference}
+      onMouseDown={handleDragStart} onMouseOver={handleDropBoxDragOver} onMouseLeave={handleDropBoxDragLeave}
+      style={{ flexDirection: (parentReference.current !== null ? parentReference.current.style.flexDirection : '') }}>
+        <div ref={imitationReference} id={"imitation-" + childBlueprint.id} className={"imitation-container " + (hoveredComponent === ("imitation-" + childBlueprint.id) ? "actively-hovered-container" : "")} 
+        onMouseOver={handleContentDragOver}>
           {children}
         </div>
-      );
-    }
+      </div>
+    );
   }
 }

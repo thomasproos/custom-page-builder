@@ -3,49 +3,80 @@
   position: static;
   border-radius: 10px;
   display: flex;
+  padding: 10px;
+}
+
+/* Hovered Container */
+.imitation-container::after {
+  border: 2px transparent dashed;
+  transition: border 200ms ease-in-out;
+}
+
+.actively-hovered-container {
+  z-index: 2;
+  position: relative;
+}
+
+.actively-hovered-container::after {
+  content: "";
+  width: 97%;
+  height: 97%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  border: 2px white dashed;
+  z-index: -1;
+}
+
+.actively-hovered-container::after {
+  content: "";
+  width: 97%;
+  height: 97%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  border: 2px white dashed;
+  z-index: -1;
+  transition: border 200ms ease-in-out;
 }
 
 /* Border Highlight */
-.top-border-highlight::before {
-  content: '';
+.top-border-highlight {
   display: block;
   width: 100px;
   margin-left: auto;
   margin-right: auto;
   border-radius: 10px;
-  border: 3px solid transparent;
+  box-shadow: 0px 0px 0px 3px white;
   pointer-events: none;
 }
 
-.right-border-highlight::after {
-  content: '';
+.right-border-highlight {
   display: block;
   height: 100px;
   margin-top: auto;
   margin-bottom: auto;
   border-radius: 10px;
-  border: 3px solid transparent;
+  box-shadow: 0px 0px 0px 3px white;
   pointer-events: none;
 }
 
-.bottom-border-highlight::after {
-  content: '';
+.bottom-border-highlight {
   display: block;
   width: 100px;
   margin-left: auto;
   margin-right: auto;
   border-radius: 10px;
-  border: 3px solid transparent;
+  box-shadow: 0px 0px 0px 3px white;
   pointer-events: none;
 }
 
-.left-border-highlight::before {
-  content: '';
+.left-border-highlight {
   display: block;
   height: 100px;
   margin-top: auto;
   margin-bottom: auto;
   border-radius: 10px;
-  border: 3px solid transparent;
+  box-shadow: 0px 0px 0px 3px white;
   pointer-events: none;
 }

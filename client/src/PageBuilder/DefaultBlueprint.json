@@ -17,7 +17,7 @@
         {
           "type": "box",
           "alignment": "column",
-          "id": 4,
+          "id": 2,
           "style": {},
           "path": [0, 0],
           "children": [],
@@ -31,23 +31,9 @@
         {
           "type": "box",
           "alignment": "column",
-          "id": 5,
+          "id": 3,
           "style": {},
           "path": [0, 1],
-          "children": [],
-          "sides": {
-            "top": false,
-            "right": true,
-            "bottom": false,
-            "left": true
-          }
-        },
-        {
-          "type": "box",
-          "alignment": "column",
-          "id": 6,
-          "style": {},
-          "path": [0, 2],
           "children": [],
           "sides": {
             "top": false,
@@ -66,25 +52,42 @@
     },
     {
       "type": "box",
-      "alignment": "column",
-      "id": 2,
-      "style": {},
+      "alignment": "row",
+      "id": 4,
+      "style": {
+        "flexDirection": "row"
+      },
       "path": [1],
-      "children": [],
-      "sides": {
-        "top": true,
-        "right": false,
-        "bottom": true,
-        "left": false
-      }
-    },
-    {
-      "type": "box",
-      "alignment": "column",
-      "id": 3,
-      "style": {},
-      "path": [2],
-      "children": [],
+      "children": [
+        {
+          "type": "box",
+          "alignment": "column",
+          "id": 5,
+          "style": {},
+          "path": [1, 0],
+          "children": [],
+          "sides": {
+            "top": false,
+            "right": true,
+            "bottom": false,
+            "left": true
+          }
+        },
+        {
+          "type": "box",
+          "alignment": "column",
+          "id": 6,
+          "style": {},
+          "path": [1, 1],
+          "children": [],
+          "sides": {
+            "top": false,
+            "right": true,
+            "bottom": false,
+            "left": true
+          }
+        }
+      ],
       "sides": {
         "top": true,
         "right": false,
