@@ -13,12 +13,11 @@
         "flexDirection": "row",
         "display": "flex",
         "minHeight": "100px",
-        "minWidth": "100px",
+        "minWidth": "calc(100% - 8px)",
         "border": "1px solid var(--border-color-1)",
-        "borderRadius": "10px",
         "padding": "5px",
         "margin": "5px",
-        "gap": "5px"
+        "overflow": "auto"
       },
       "path": [0],
       "children": [
@@ -30,12 +29,12 @@
             "flexDirection": "column",
             "display": "flex",
             "minHeight": "100px",
-            "minWidth": "100px",
+            "minWidth": "calc(50% - 6px)",
             "border": "1px solid var(--border-color-1)",
-            "borderRadius": "10px",
             "padding": "5px",
             "margin": "5px",
-            "gap": "5px"
+            "gap": "5px",
+            "overflow": "auto"
           },
           "path": [0, 0],
           "children": [],
@@ -54,12 +53,12 @@
             "flexDirection": "column",
             "display": "flex",
             "minHeight": "100px",
-            "minWidth": "100px",
+            "minWidth": "calc(50% - 8px)",
             "border": "1px solid var(--border-color-1)",
-            "borderRadius": "10px",
             "padding": "5px",
             "margin": "5px",
-            "gap": "5px"
+            "gap": "5px",
+            "overflow": "auto"
           },
           "path": [0, 1],
           "children": [],
@@ -88,10 +87,10 @@
         "minHeight": "100px",
         "minWidth": "100px",
         "border": "1px solid var(--border-color-1)",
-        "borderRadius": "10px",
         "padding": "5px",
         "margin": "5px",
-        "gap": "5px"
+        "gap": "5px",
+        "overflow": "auto"
       },
       "path": [1],
       "children": [
@@ -105,10 +104,10 @@
             "minHeight": "100px",
             "minWidth": "100px",
             "border": "1px solid var(--border-color-1)",
-            "borderRadius": "10px",
             "padding": "5px",
             "margin": "5px",
-            "gap": "5px"
+            "gap": "5px",
+            "overflow": "auto"
           },
           "path": [1, 0],
           "children": [],
@@ -129,10 +128,10 @@
             "minHeight": "100px",
             "minWidth": "100px",
             "border": "1px solid var(--border-color-1)",
-            "borderRadius": "10px",
             "padding": "5px",
             "margin": "5px",
-            "gap": "5px"
+            "gap": "5px",
+            "overflow": "auto"
           },
           "path": [1, 1],
           "children": [],

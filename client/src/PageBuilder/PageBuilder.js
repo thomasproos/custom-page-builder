@@ -5,23 +5,27 @@ import { useState } from 'react';
 import './PageBuilder.css';
 
 // Import Components
-import DragCanvas from './Canvas/Canvas';
+import Canvas from './Canvas/Canvas';
 import Toolbar from './ToolBar/Toolbar';
 
 // Import JSON
 import blueprintData from './DefaultBlueprint.json';
 
 export default function PageBuilder({ theme }) {
-  const [cursorTool, setCursorTool] = useState('auto');
   const [blueprint, setBlueprint] = useState(blueprintData);
   
   return(
-    <section id="page-builder" style={{ cursor: cursorTool }}>
+    <section id="page-builder">
       {/* Toolbar */}
-      <Toolbar cursorTool={cursorTool} setCursorTool={setCursorTool} />
+      <Toolbar />
       
-      {/* Canvas */}
-      <DragCanvas cursorTool={cursorTool} blueprint={blueprint}/>
+      <div style={{ width: '100%', height: '100%' }}>
+        {/* Attributes Panel */}
+
+
+        {/* Canvas */}
+        <Canvas blueprint={blueprint}/>
+      </div>
     </section>
   );
 }

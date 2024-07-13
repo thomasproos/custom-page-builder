@@ -5,23 +5,16 @@ import './RecursivePaint.css';
 
 // Import Components
 import Box from "../Box/Box";
-import DraggableComponent from '../DraggableComponent/DraggableComponent';
+import InteractiveContainer from '../DraggableComponent/InteractiveContainer';
 
-export default function RecursivePaint({ childBlueprint, parentReference, cursorTool, canvasReference }) {
+export default function RecursivePaint({ childBlueprint, parentReference, canvasReference }) {
   // Box Component
   if (childBlueprint.type === 'box') {
-    if (cursorTool === 'move') {
       return(
-        <DraggableComponent childBlueprint={childBlueprint} canvasReference={canvasReference} parentReference={parentReference}>
-          <Box childBlueprint={childBlueprint} parentReference={parentReference} cursorTool={cursorTool}
-          canvasReference={canvasReference}/>    
-        </DraggableComponent>
+        <InteractiveContainer childBlueprint={childBlueprint} canvasReference={canvasReference} parentReference={parentReference}>
+          <Box childBlueprint={childBlueprint} parentReference={parentReference} canvasReference={canvasReference}/>    
+        </InteractiveContainer>
       );
-    } else {
-      return(
-        <Box childBlueprint={childBlueprint} parentReference={parentReference} cursorTool={cursorTool}/>    
-      );
-    }
   } else {
     // TO-DO (future components)
   }

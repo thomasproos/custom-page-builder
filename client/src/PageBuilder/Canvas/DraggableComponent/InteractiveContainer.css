@@ -1,9 +1,29 @@
-.blueprint-dropbox {
-  transition: padding 100ms ease-in-out, margin 100ms ease-in-out, border-color 250ms ease-in-out;
+.interactive-container {
   position: static;
-  border-radius: 10px;
-  display: flex;
-  padding: 10px;
+  margin: 2px;
+}
+
+/* Active Container Interactive Bar */
+#active-type-container {
+  position: relative;
+  z-index: 8;
+}
+
+#active-type-label {
+  position: absolute;
+  width: fit-content;
+  /* color: white; */
+  font-weight: 800;
+  background-color: #9296F0;
+  bottom: 0;
+  left: 0;
+  font-size: 14px;
+  padding: 3px;
+  padding-left: 6px;
+  padding-right: 6px;
+  margin-bottom: -26px;
+  margin-left: -3px;
+  z-index: 8;
 }
 
 /* Hovered Container */
@@ -31,8 +51,7 @@
 /* Border Highlight */
 .top-border-highlight {
   display: block;
-  width: 100px;
-  max-height: 80%;
+  width: 80%;
   margin-left: auto;
   margin-right: auto;
   border-radius: 10px;
@@ -45,8 +64,7 @@
 
 .right-border-highlight {
   display: block;
-  height: 100px;
-  max-height: 80%;
+  height: 80%;
   margin-top: auto;
   margin-bottom: auto;
   border-radius: 10px;
@@ -59,8 +77,7 @@
 
 .bottom-border-highlight {
   display: block;
-  width: 100px;
-  max-height: 80%;
+  width: 80%;
   margin-left: auto;
   margin-right: auto;
   border-radius: 10px;
@@ -73,8 +90,7 @@
 
 .left-border-highlight {
   display: block;
-  height: 100px;
-  max-height: 80%;
+  height: 80%;
   margin-top: auto;
   margin-bottom: auto;
   border-radius: 10px;

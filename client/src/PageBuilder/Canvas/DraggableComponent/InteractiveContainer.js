@@ -1,15 +1,14 @@
 // Import Stylesheet
-import './DraggableComponent.css';
+import './InteractiveContainer.css';
 
 // Import Dependencies
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionTypes } from '../../../ReduxStore.js';
 
-export default function DraggableComponent({ children, childBlueprint, canvasReference, parentReference }) {
+export default function InteractiveContainer({ children, childBlueprint, canvasReference, parentReference }) {
   const [draggedCoordinates, setDraggedCoordinates] = useState([]);
   const containerReference = useRef(null);
-  const imitationReference = useRef(null);
 
   // Establish the redux store
   const dispatch = useDispatch();
@@ -17,6 +16,7 @@ export default function DraggableComponent({ children, childBlueprint, canvasRef
   // Establish global state variables
   const draggedComponent = useSelector(state => state.draggedComponent);
   const hoveredComponent = useSelector(state => state.hoveredComponent);
+  const activeComponent = useSelector(state => state.activeComponent);
 
   // Handle the start of the Drag Action
   const handleDragStart = (event) => {
@@ -195,39 +195,52 @@ export default function DraggableComponent({ children, childBlueprint, canvasRef
     }
   };
 
-  const handleContentDragOver = (event) => {
+  // Handle making a component the active one
+  const handleComponentClick = (event) => {
     event.stopPropagation();
 
-    if (draggedComponent !== null) {
-      if (childBlueprint.children.length === 0) {  
-        // The redux value setter method
-        const setHoveredComponent = (value) => {
-          dispatch({ type: actionTypes.SET_HOVERED_COMPONENT, payload: value });
-        };
+    if (activeComponent !== event.target.id) {
+      const setActiveComponent = (value) => {
+        dispatch({ type: actionTypes.SET_ACTIVE_COMPONENT, payload: value });
+      };
   
-        setHoveredComponent(imitationReference.current.id);
-      }
-
-      // Remove the hovered element
-      const sideClassNameArray = ['top-border-highlight', 'right-border-highlight', 'bottom-border-highlight', 'left-border-highlight'];
-      Array.from(parentReference.current.children).forEach((item) => {
-        if (sideClassNameArray.includes(item.className)) {
-          parentReference.current.removeChild(item);
-        }
-      });
+      setActiveComponent("box-" + childBlueprint.id);
     }
   };
 
   if (canvasReference !== null) {
-    return(
-      <div className="blueprint-dropbox" id={"dropbox-" + childBlueprint.id} draggable="true" ref={containerReference}
-      onMouseDown={handleDragStart} onMouseOver={handleDropBoxDragOver} onMouseLeave={handleDropBoxDragLeave}
-      style={{ flexDirection: (parentReference.current !== null ? parentReference.current.style.flexDirection : '') }}>
-        <div ref={imitationReference} id={"imitation-" + childBlueprint.id} className={"imitation-container " + (hoveredComponent === ("imitation-" + childBlueprint.id) ? "actively-hovered-container" : "")} 
-        onMouseOver={handleContentDragOver}>
+    // Check if the box is active
+    if (("box-" + childBlueprint.id) === activeComponent) {
+      return(
+        <div className="interactive-container" id={"interactive-" + childBlueprint.id} draggable="true" ref={containerReference}
+        onMouseDown={handleDragStart} onMouseOver={handleDropBoxDragOver} onMouseLeave={handleDropBoxDragLeave}
+        style={{
+          minWidth: childBlueprint.style.minWidth,
+          minHeight: childBlueprint.style.minHeight, 
+          boxShadow: "0px 0px 0px 2px #9296F0",
+          border: "1px dashed gray"
+        }}>
+          {children}
+          <div id="active-type-container">
+            <div id="active-type-label">{childBlueprint.type.charAt(0).toUpperCase() + childBlueprint.type.slice(1)}</div>
+            <div id="active-buttons-container">
+              <div></div>
+            </div>
+          </div>
+        </div>
+      );
+    } else {
+      return(
+        <div className="interactive-container" id={"interactive-" + childBlueprint.id} ref={containerReference}
+        
+        style={{
+          minWidth: childBlueprint.style.minWidth,
+          minHeight: childBlueprint.style.minHeight, 
+          border: "1px dashed gray"
+        }} onClick={handleComponentClick}>
           {children}
         </div>
-      </div>
-    );
+      );
+    }
   }
 }

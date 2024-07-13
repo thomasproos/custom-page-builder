@@ -1,16 +1,33 @@
 /* Page Canvas */
 #canvas {
-  flex: 1;
+  height: calc(100% - 2px);
   min-height: fit-content;
   display: flex;
-  flex-direction: column;
   align-items: center;
   border: 1px solid transparent;
   transition: border 300ms ease-in-out;
-  padding: 5px;
+  padding: 2px;
+  border: 1px dashed gray;
+  box-sizing: border-box;
+  overflow: auto;
+  margin: 1px;
 }
 
 /* Active Dragging */
 .active-drag-hover {
   border: 1px solid white !important;
+}
+
+/* Scrolling */
+#canvas::-webkit-scrollbar {
+  width: 1em;
+}
+ 
+#canvas::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+ 
+#canvas::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
 }

@@ -1,5 +1,5 @@
 // Import Depedencies
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionTypes } from '../../ReduxStore.js';
 
@@ -9,32 +9,31 @@ import './Canvas.css';
 // Import Components
 import RecursivePaint from './RecursivePaint/RecursivePaint';
 
-export default function Canvas({ cursorTool, blueprint }) {
+export default function Canvas({ blueprint }) {
   const canvasReference = useRef(null);
 
   // Establish the redux store
   const dispatch = useDispatch();
+  const activeComponent = useSelector(state => state.activeComponent);
 
-  // const handleClick = (event) => {
-  //   // The redux value setter method
-  //   const setHoveredComponent = (value) => {
-  //     dispatch({ type: actionTypes.SET_HOVERED_COMPONENT, payload: value });
-  //   };
+  const handleCanvasClick = () => {
+    const setActiveComponent = (value) => {
+      dispatch({ type: actionTypes.SET_ACTIVE_COMPONENT, payload: value });
+    };
 
-  //   // Clear the hovered component when clicked
-  //   setHoveredComponent(null);
-  // };
-
-  // Load in user preferences
-
+    setActiveComponent("canvas");
+  };
 
   // Canvas Type Paint
   return(
-    <section id="canvas" ref={canvasReference} className="no-highlight-or-drag" style={{ flexDirection: 'column' }}>
+    <section id="canvas" ref={canvasReference} className="no-highlight-or-drag" onClick={handleCanvasClick}
+    style={{ 
+      flexDirection: 'column',
+      boxShadow: (activeComponent === 'canvas' ? "0px 0px 0px 2px #9296F0" : "")  
+    }}>
       {blueprint.children.map((child, index) => {
         return (
-          <RecursivePaint key={index} childBlueprint={child} parentReference={canvasReference} cursorTool={cursorTool}
-          canvasReference={canvasReference}/>
+          <RecursivePaint key={index} childBlueprint={child} parentReference={canvasReference} canvasReference={canvasReference}/>
         );
       })}
     </section>
