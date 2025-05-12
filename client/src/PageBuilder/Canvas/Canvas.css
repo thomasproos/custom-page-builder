@@ -4,10 +4,6 @@
   min-height: fit-content;
   display: flex;
   align-items: center;
-  border: 1px solid transparent;
-  transition: border 300ms ease-in-out;
-  padding: 2px;
-  border: 1px dashed gray;
   box-sizing: border-box;
   overflow: auto;
   margin: 1px;

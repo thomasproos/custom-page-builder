@@ -8,9 +8,9 @@
   font-size: 20px;
 
   /* Variables */
-  --background-color-1: rgb(23, 23, 24);
-  --background-color-2: rgb(37, 36, 36);
-  --background-color-3: rgb(53, 53, 53);
+  --background-color-1: rgb(92, 93, 141);
+  --background-color-2: rgb(243, 243, 243);
+  --background-color-3: rgb(153, 161, 166);
 
-  --border-color-1: rgba(77, 77, 77, 0.842);
+  --border-color-1: rgba(31, 31, 31, 0.842);
 }

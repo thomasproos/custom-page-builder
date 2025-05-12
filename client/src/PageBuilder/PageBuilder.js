@@ -7,6 +7,7 @@ import './PageBuilder.css';
 // Import Components
 import Canvas from './Canvas/Canvas';
 import Toolbar from './ToolBar/Toolbar';
+import Index from './Index/Index';
 
 // Import JSON
 import blueprintData from './DefaultBlueprint.json';

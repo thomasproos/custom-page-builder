@@ -1,6 +1,6 @@
 .interactive-container {
   position: static;
-  margin: 2px;
+  margin: 5px;
 }
 
 /* Active Container Interactive Bar */
@@ -12,7 +12,6 @@
 #active-type-label {
   position: absolute;
   width: fit-content;
-  /* color: white; */
   font-weight: 800;
   background-color: #9296F0;
   bottom: 0;

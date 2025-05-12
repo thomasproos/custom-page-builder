@@ -17,6 +17,7 @@ export default function InteractiveContainer({ children, childBlueprint, canvasR
   const draggedComponent = useSelector(state => state.draggedComponent);
   const hoveredComponent = useSelector(state => state.hoveredComponent);
   const activeComponent = useSelector(state => state.activeComponent);
+  const marginIndex = useSelector(state => state.marginIndex);
 
   // Handle the start of the Drag Action
   const handleDragStart = (event) => {
@@ -76,7 +77,7 @@ export default function InteractiveContainer({ children, childBlueprint, canvasR
           };
 
           containerReference.current.style.pointerEvents = 'auto';
-          // setHoveredComponent(null);
+          setHoveredComponent(null);
           setDraggedComponent(null);
 
           // Remove the hovered element
@@ -146,7 +147,6 @@ export default function InteractiveContainer({ children, childBlueprint, canvasR
       setHoveredComponent(containerReference.current.id);
 
       if (side !== null) {
-        // console.log(side);
         // Check if there already is a hover element
         let activeHoverBar = false;
         Array.from(parentReference.current.children).forEach((item) => {
@@ -208,17 +208,60 @@ export default function InteractiveContainer({ children, childBlueprint, canvasR
     }
   };
 
+  // Calculate height and width of the interactive container
+  // Additional measurements are needed due to margin/padding from the interactive container
+  if (canvasReference !== null) {
+    if (Object.keys(childBlueprint.style).length > 0) {
+      // console.log(Object.keys(childBlueprint.style).length)
+      const width = childBlueprint.style.minWidth;
+      // Width calculations
+      if (width.includes('%')) {
+        // Check if a calculation is already being performed
+        if (width.includes('calc')) {
+          // Check if the maring index is up to date, update if not
+          if (!width.includes(`- ${marginIndex}`)) {
+            const percentage = width.slice(0, width.indexOf('%'));
+            console.log(percentage + " : " + marginIndex + "px");
+            childBlueprint.style.minWidth = `${percentage} - ${marginIndex}px)`;
+          }
+        } else {
+          // console.log("width: " + width + " : " + marginIndex + "px");
+          // If not set the calculation with the index
+          childBlueprint.style.minWidth = `calc(${width} - ${marginIndex}px)`;
+        }
+      } else if (width.includes('px')) {
+        // Check if a calculation is already being performed
+        if (width.includes('calc')) {
+          // Check if the maring index is up to date, update if not
+          if (!width.includes(`- ${marginIndex}`)) {
+            const percentage = width.slice(0, width.indexOf('%'));
+            childBlueprint.style.minWidth = `${percentage} - ${marginIndex}px)`;
+          }
+        } else {
+          // If not set the calculation with the index
+          childBlueprint.style.minWidth = `calc(${width} + ${marginIndex}px)`;
+        }
+        // const pixels = width.slice(0, width.length - 2);
+        // childBlueprint.style.minWidth = `${parseInt(pixels)}px`;
+      }
+    }
+
+    // Height calculations
+
+  }
+
   if (canvasReference !== null) {
     // Check if the box is active
     if (("box-" + childBlueprint.id) === activeComponent) {
       return(
         <div className="interactive-container" id={"interactive-" + childBlueprint.id} draggable="true" ref={containerReference}
         onMouseDown={handleDragStart} onMouseOver={handleDropBoxDragOver} onMouseLeave={handleDropBoxDragLeave}
-        style={{
+        onClick={(event) => {event.stopPropagation();}} style={{
           minWidth: childBlueprint.style.minWidth,
           minHeight: childBlueprint.style.minHeight, 
-          boxShadow: "0px 0px 0px 2px #9296F0",
-          border: "1px dashed gray"
+          boxShadow: "0px 0px 1px 2px #9296F0",
+          border: "1px dashed transparent",
+          margin: "5px"
         }}>
           {children}
           <div id="active-type-container">

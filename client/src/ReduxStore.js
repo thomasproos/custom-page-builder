@@ -6,7 +6,8 @@ const initialState = {
   draggedComponent: null,
   activeComponent: null,
   pageSettings: null,
-  userSettings: null
+  userSettings: null,
+  marginIndex: 22
 };
 
 const actionTypes = {

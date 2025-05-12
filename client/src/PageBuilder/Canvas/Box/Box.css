@@ -1,7 +1,9 @@
 /* Canvas Box */
 .canvas-box {
-  min-height: calc(100% - 22px) !important;
-  min-width: calc(100% - 22px) !important;
+  height: calc(100% - 22px);
+  width: calc(100% - 22px);
+  overflow: visible !important;
+  padding: 5px;
 }
 
 /* Scrollbar */

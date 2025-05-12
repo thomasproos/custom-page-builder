@@ -21,7 +21,7 @@ export default function Canvas({ blueprint }) {
       dispatch({ type: actionTypes.SET_ACTIVE_COMPONENT, payload: value });
     };
 
-    setActiveComponent("canvas");
+    setActiveComponent(null);
   };
 
   // Canvas Type Paint
